@@ -1,0 +1,43 @@
+@font-face {
+    font-family: 'DuBook';
+    src: url("../src/assets/fonts/DurationBook-Bold.ttf");
+}
+@font-face {
+    font-family: 'OriDubook';
+    src: url("../src/assets/fonts/Duration\ Book.ttf");
+}
+
+@font-face {
+    font-family: 'RegBitCount';
+    src:url("../src/assets/fonts/BitcountSingle-Regular.ttf");
+}
+@font-face {
+    font-family:'BoldBitCount';
+    src: url("../src/assets/fonts/BitcountSingle-Bold.ttf");
+}
+
+
+
+@import "tailwindcss";
+
+@theme{
+    --font-dubook:'DuBook','sans-serif';
+    --font-oridubook:'OriDubook','sans-serif';
+    --font-regbitcnt:'RegBitCount','sans-serif';
+    --font-bldbitcnt:'BoldBitCount','sans-serif';
+
+    --animate-infinite-scroll: infinite-scroll 40s linear infinite;
+
+    @keyframes infinite-scroll {
+        0% {
+            transform: translateX(0%);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+}
+
+
+
+    
