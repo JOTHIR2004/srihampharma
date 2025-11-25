@@ -21,7 +21,7 @@ export default function User() {
   const fetchOrderDetails = async (userId) => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/orders/user/${userId}`
+        `https://srihampharma.onrender.com/api/orders/user/${userId}`
       );
       setOrders(res.data);
       console.log("User orders:", res.data);
@@ -35,7 +35,7 @@ export default function User() {
   const handleDeleteOrd = async (orderId) => {
     try {
       if (window.confirm('Are you sure you want to delete this order?')) {
-        await axios.delete(`http://localhost:5000/api/orders/${orderId}`, {
+        await axios.delete(`https://srihampharma.onrender.com/api/orders/${orderId}`, {
           headers: {
             Authorization: `Bearer ${user?.token}`, // only if backend checks token
           },

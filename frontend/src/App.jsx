@@ -47,7 +47,7 @@ function App() {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/products/get");
+      const res = await fetch("https://srihampharma.onrender.com/api/products/get");
       const data = await res.json();
       console.log("Fetched products:", data);
       setProducts(data);

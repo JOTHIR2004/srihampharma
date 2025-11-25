@@ -18,7 +18,7 @@ export default function Cards({ id, name, img, desc, price }) {
 
             console.log("📦 Sending order payload:", payload);
 
-            const res = await axios.post("http://localhost:5000/api/orders/create", payload);
+            const res = await axios.post("https://srihampharma.onrender.com/api/orders/create", payload);
             console.log("✅ Order response:", res.data);
 
             alert("Order placed successfully!");

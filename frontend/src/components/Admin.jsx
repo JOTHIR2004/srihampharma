@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { MdDelete } from "react-icons/md";
 import axios from 'axios';
 
+// await axios.delete(`http://localhost:5000/api/products/${id}`);
 export default function Admin() {
   const [products, setProducts] = useState([]);
   const [form, setForm] = useState({ name: '', description: '', price: '', image: null });
@@ -10,7 +11,7 @@ export default function Admin() {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/orders/all");
+      const res = await axios.get("https://srihampharma.onrender.com/api/orders/all");
       console.log("Fetched orders:", res.data);
       setOrders(res.data);
     } catch (err) {
@@ -21,7 +22,7 @@ export default function Admin() {
 
   const takeOrder = async (id) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/orders/${id}`);
+      const res = await axios.put(`https://srihampharma.onrender.com/api/orders/${id}`);
 
       alert(res.data.message);
 
@@ -38,7 +39,7 @@ export default function Admin() {
   const deliverOrder = async (id) => {
     try {
       if (window.confirm('Are you sure product delivered?')) {
-      const res = await axios.put(`http://localhost:5000/api/orders/deliver/${id}`);}
+      const res = await axios.put(`https://srihampharma.onrender.com/api/orders/deliver/${id}`);}
       alert(res.data.message);
 
       // FIXED — use id instead of _id
@@ -59,7 +60,7 @@ export default function Admin() {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/products/get');
+      const res = await axios.get('https://srihampharma.onrender.com/api/products/get');
       setProducts(res.data);
     } catch (err) {
       console.error('Failed to fetch products:', err);
@@ -80,7 +81,7 @@ export default function Admin() {
     data.append('price', form.price);
     data.append('image', form.image);
     try {
-      const res = await axios.post('http://localhost:5000/api/products/upload', data);
+      const res = await axios.post('https://srihampharma.onrender.com/api/products/upload', data);
       if (res.status === 200) {
         alert('Product uploaded successfully');
       }
@@ -94,7 +95,8 @@ export default function Admin() {
 
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
-      await axios.delete(`http://localhost:5000/api/products/${id}`);
+      
+      await axios.delete(`https://srihampharma.onrender.com/api/products/${id}`)
       fetchProducts();
     }
   };
@@ -103,7 +105,7 @@ export default function Admin() {
 
   const handleUpdatePrice = async (id) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/products/${id}`, {
+      const res = await axios.put(`https://srihampharma.onrender.com/api/products/${id}`, {
         price: form.price,
       });
 
