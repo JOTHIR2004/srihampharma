@@ -65,10 +65,37 @@ router.post('/upload', upload.single('image'), async (req, res) => {
 });
 
 
+// router.put('/:id', async (req, res) => {
+//   const updated = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
+//   res.json(updated);
+// });
+
 router.put('/:id', async (req, res) => {
-  const updated = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
-  res.json(updated);
+  try {
+    const { price } = req.body;
+
+    if (price === undefined) {
+      return res.status(400).json({ error: "Price is required" });
+    }
+
+    const updated = await Product.findByIdAndUpdate(
+      req.params.id,
+      { price },
+      { new: true }
+    );
+
+    if (!updated) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    res.json(updated);
+
+  } catch (err) {
+    console.error("Update error:", err);
+    res.status(500).json({ error: "Failed to update product" });
+  }
 });
+
 
 router.delete('/:id', async (req, res) => {
   await Product.findByIdAndDelete(req.params.id);

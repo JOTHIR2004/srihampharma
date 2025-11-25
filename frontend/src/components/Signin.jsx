@@ -18,13 +18,13 @@ function Signin() {
     e.preventDefault();
     try {
       const res = await signin(form);
-      
+
       console.log("📩 Response from backend:", res.data);
 
       // ✅ Use context instead of only localStorage
       login({ user: res.data.user, token: res.data.token });
-      
-      localStorage.setItem("id", res.data.user.id);// or res.data.user.id depending on backend
+
+      localStorage.setItem("id", res.data.user.id);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.user.role);
 
@@ -52,14 +52,16 @@ function Signin() {
         googleId: decoded.sub,
         name: decoded.name,
       });
+
       res.data.role = "user";
+
       // ✅ Use context here too
       login({
         user: { name: decoded.name, email: decoded.email, role: res.data.role },
         token: res.data.token,
       });
 
-      localStorage.setItem("id", res.data.user.id); 
+      localStorage.setItem("id", res.data.user.id);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.role);
 
@@ -74,30 +76,50 @@ function Signin() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-        />
-        <button type="submit">Sign In</button>
-      </form>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold text-center mb-6">Sign In</h2>
 
-      <div>
-        <GoogleLogin
-          onSuccess={handleGoogleSuccess}
-          onError={() => console.log("Google login failed")}
-        />
+        {/* Email/Password Form */}
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            type="submit"
+            className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          >
+            Sign In
+          </button>
+        </form>
+
+        {/* Divider */}
+        <div className="flex items-center my-6">
+          <hr className="flex-grow border-gray-300" />
+          <span className="px-2 text-gray-500">OR</span>
+          <hr className="flex-grow border-gray-300" />
+        </div>
+
+        {/* Google Login */}
+        <div className="flex justify-center">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={() => console.log("Google login failed")}
+          />
+        </div>
       </div>
     </div>
   );
