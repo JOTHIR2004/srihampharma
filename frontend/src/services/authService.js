@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/auth";  // backend URL
+const API_URL = "http://https://srihampharma.onrender.com/api/auth";  // backend URL
 
 // Local Signup
 export const signup = (data) => axios.post(`${API_URL}/signup`, data);
