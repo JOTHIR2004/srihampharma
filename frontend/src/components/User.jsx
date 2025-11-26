@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
+import { CiMenuBurger } from "react-icons/ci";
+
 import axios from "axios";
 
 export default function User() {
   const [user, setUser] = useState(null);
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -58,29 +61,66 @@ export default function User() {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
-      <div className="text-black text-3xl font-bold border-b-2 flex justify-between items-center px-6 py-4 bg-white shadow">
-        <button
-          onClick={() => navigate("/")}
-          className="bg-yellow-300 border-2 px-4 py-2 rounded-2xl text-2xl hover:bg-red-300 transition"
-        >
-          Home
-        </button>
+      <div className="text-black text-3xl font-bold border-b-2 px-6 py-4 bg-white shadow">
 
-        <div className="flex items-center gap-4">
-          {user ? (
-            <>
-              <h1 className="bg-blue-400 border-2 px-4 py-2 rounded-2xl text-2xl">
-                {user.username || user.user?.username || user.user?.name}
-              </h1>
-              <p className="bg-blue-400 border-2 px-4 py-2 rounded-2xl text-2xl">
-                {user.email || user.user?.email}
-              </p>
-            </>
-          ) : (
-            <h1 className="text-xl text-gray-600">No user</h1>
-          )}
+        {/* Top row */}
+        <div className="flex justify-between items-center">
+
+          {/* Home button — always visible */}
+          <button
+            onClick={() => navigate("/")}
+            className="bg-yellow-300 border-2 px-4 py-2 rounded-2xl text-2xl hover:bg-red-300 transition"
+          >
+            Home
+          </button>
+
+          {/* User details — visible only on md and up */}
+          <div className="hidden md:flex items-center gap-4">
+            {user ? (
+              <>
+                <h1 className="bg-blue-400 border-2 px-4 py-2 rounded-2xl text-2xl">
+                  {user.username || user.user?.username || user.user?.name}
+                </h1>
+                <p className="bg-blue-400 border-2 px-4 py-2 rounded-2xl text-2xl">
+                  {user.email || user.user?.email}
+                </p>
+              </>
+            ) : (
+              <h1 className="text-xl text-gray-600">No user</h1>
+            )}
+          </div>
+
+          {/* Hamburger — only on mobile */}
+          <button
+            onClick={() => setOpen(!open)}
+            className="md:hidden text-3xl text-blue-500"
+          >
+            <CiMenuBurger />
+          </button>
         </div>
+
+        {/* Dropdown for mobile */}
+        {open && (
+          <div className="md:hidden mt-4 bg-white shadow-md rounded-lg p-4 flex flex-col gap-3 text-xl">
+
+            {user ? (
+              <>
+                <h1 className="bg-blue-400 border-2 px-4 py-2 rounded-xl">
+                  {user.username || user.user?.username || user.user?.name}
+                </h1>
+
+                <p className="bg-blue-400 border-2 px-4 py-2 rounded-xl">
+                  {user.email || user.user?.email}
+                </p>
+              </>
+            ) : (
+              <h1 className="text-gray-600">No user</h1>
+            )}
+
+          </div>
+        )}
       </div>
+
 
       {/* Orders Section */}
       <div className="flex flex-col items-center mt-8">

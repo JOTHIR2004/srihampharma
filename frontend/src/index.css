@@ -38,6 +38,18 @@
     }
 }
 
+@media (max-width: 768px) {
+    :root {
+        --animate-infinite-scroll: infinite-scroll 5s linear infinite; /* faster */
+    }
+}
+
+@media (min-width: 1024px) {
+    :root {
+        --animate-infinite-scroll: infinite-scroll 40s linear infinite; /* default */
+    }
+}
+
 
 
     

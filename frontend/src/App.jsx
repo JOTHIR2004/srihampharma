@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
 import { FaCaretSquareUp, FaKiwiBird } from "react-icons/fa";
 import { CiMenuBurger } from "react-icons/ci";
 import './App.css'
@@ -8,12 +7,7 @@ import Hero from './components/Hero'
 import Footer from './components/Footer'
 import ScrollNames from './components/ScrollNames';
 import { useNavigate } from "react-router-dom";
-import oxawin from './assets/oxawinoz.jpg';
-import oraciumplus from './assets/oraciumplus.jpg';
-import oraclamkid from './assets/oraclamkid.jpg';
-import orcinacplus from './assets/orcinacplus.jpeg';
-import orcithro500 from './assets/orcithro500.jpg';
-import theofix200 from './assets/theofix200.jpg';
+
 import Nav from './components/Nav';
 
 export function scrollToProduct() {
@@ -41,7 +35,7 @@ function App() {
   const navigate = useNavigate();
   const [canScroll, setCanScroll] = useState(false)
 
-  const [darkMode, setDarkMode] = useState(false);
+  // const [darkMode, setDarkMode] = useState(false);
   const [isOpenNav, setIsOpenNav] = useState(false);
   const [products, setProducts] = useState([]);
 
